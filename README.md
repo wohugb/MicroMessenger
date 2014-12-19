@@ -9,11 +9,6 @@ MicroMessenger
 
 [zxlie/WeixinApi](https://github.com/zxlie/WeixinApi)
 
-
-## 关于分享按钮问题
-
-如果使用单页js框架，在android的微信内置浏览器中，第一次加载可以用分享按钮，第二页就失效，暂时没找到问题所在，只能用暴力刷新的方式了。
-
 ## angularjs的services
 
 ```js
@@ -57,4 +52,29 @@ angular.module('worldApp')
     };
     return Wechat;
   })
+.factory('userAgent',function(){
+    this.isAndroid =  function() {
+      return navigator.userAgent.match(/Android/i);
+    };
+    this.isIOS = function() {
+      return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    };
+    this.isBlackBerry = function(){
+      return navigator.userAgent.match(/BlackBerry/i);
+    };
+    this.isOpera = function(){
+      return navigator.userAgent.match(/Opera Mini/i);
+    };
+    this.isWindows = function(){
+      return navigator.userAgent.match(/IEMobile/i);
+    };
+    this.mobile = function(){
+      return (this.isAndroid || this.isIOS || this.isBlackBerry || this.isOpera || this.isWindows)
+    };
+    return this;
+  })
   ```
+
+## 关于分享按钮问题
+
+如果使用单页js框架，在android的微信内置浏览器中，第一次加载可以用分享按钮，第二页就失效，暂时没找到问题所在，只能用暴力刷新的方式了。
